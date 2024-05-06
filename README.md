@@ -7,5 +7,4 @@
 - [Carpeta principal](Game/src/)
    - [Utils](Game/src/utils/)
    - [Player model](Game/src/player/)
-   - [Enemy model](Game/src/enemy/)
    - [NPC model](Game/src/NPCs/)
