@@ -4,11 +4,12 @@ import java.util.Scanner;
 public class MyMethods {
     public static void waitForInput(Scanner input){
         boolean isPressed = false;
+        threadSleep(800);
 
         while(!isPressed){
-            System.out.println("Press 'd' or ENTER to continue...");
+            System.out.println("Press ENTER to continue...");
 
-            if (input.nextLine().equalsIgnoreCase("d") || input.nextLine().isEmpty()){
+            if (input.nextLine().isEmpty()){
                 isPressed = true;
             }
             else
@@ -25,7 +26,7 @@ public class MyMethods {
     public static void print(String text){
         for(char c: text.toCharArray()){
             System.out.print(c);
-            threadSleep(80);
+            threadSleep(60);
         }
         System.out.println();
     }

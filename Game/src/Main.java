@@ -1,3 +1,4 @@
+import NPCs.Encounters;
 import player.Player;
 import utils.MyMethods;
 
@@ -6,14 +7,18 @@ import java.util.Scanner;
 public class Main {
 
     static Player currentPlayer = new Player(10, 0, 0, 1, 0, 0, 0);
+    static int karma = currentPlayer.getKarma();
+    static int potions = currentPlayer.getPotions();
 
     public static void main(String[] args) {
-        start();
+        Scanner input = new Scanner(System.in);
+        start(input);
+        Encounters.firstEncounter(currentPlayer, input);
+        input.close();
     }
 
-    private static void start(){
+    private static void start(Scanner input){
         String option;
-        Scanner input = new Scanner(System.in);
 
         MyMethods.print("............... . . . . . . .  .  .  .  .  .  .  .   .   .");
         MyMethods.print(". . . . Hades' Quest: Legacy of the Fallen God . . . .");
@@ -25,7 +30,7 @@ public class Main {
         MyMethods.print("appears to be a bars door. Though it you can see withered trees and green waterfalls, from");
         MyMethods.print("which emerge silhouettes of corpses.");
         MyMethods.waitForInput(input);
-        MyMethods.print("Beyond the bars door you see a little strange creature. Would you like to get closer? y/N");
+        MyMethods.print("Beyond the bars door you see a strange little creature. Would you like to get closer? y/N");
         MyMethods.threadSleep(300);
         option = input.nextLine();
 
@@ -40,15 +45,26 @@ public class Main {
         MyMethods.clear();
 
         MyMethods.print("You approach the bars and catch its attention.");
-        MyMethods.print("Even though it looks like a little demon, it's the only thing that doesn't seem lethal in that place.");
+        MyMethods.print("Even though it looks like a little imp, it's the only thing that doesn't seem lethal in that place.");
         MyMethods.print("'Hmm', it clears its throat, 'What do we got here?' I can't believe my eyes! A human! heh heh heh...");
-        MyMethods.print("'Name's Fobos. Now tell me yours, don't be shy!'");
+        MyMethods.print("'Name's Phobos. Now tell me yours, don't be shy!'");
         MyMethods.threadSleep(300);
         System.out.print("Write your name here: ");
         currentPlayer.setName(input.nextLine());
         String playerName = currentPlayer.getName();
 
-        MyMethods.print("Fobos: " + playerName + "? Now that's a terrible name! Heh heh heh...");
+        while (playerName.isEmpty()){
+            MyMethods.print("Phobos: You can't even remember your own name! [Laughs]");
+            System.out.print("Let's do it again. Please, write your name: ");
+            currentPlayer.setName(input.nextLine());
+            playerName = currentPlayer.getName();
+
+            if (!playerName.isEmpty()){
+                MyMethods.print("You: Wait! I remember now. The name's " + currentPlayer.getName() + ".");
+            }
+        }
+
+        MyMethods.print("Phobos: " + playerName + "? Now that's a terrible name! Heh heh heh...");
         MyMethods.threadSleep(1000);
         MyMethods.clear();
 
@@ -61,13 +77,13 @@ public class Main {
 
         while (numOption != 1){
             if (numOption == 2){
-                MyMethods.print("Fobos: WHAT am I? That's rude, man!");
+                MyMethods.print("Phobos: WHAT am I? That's rude, man!");
                 MyMethods.print("...Oh, never mind. I'm just one of Lord Hades' servant. A demon condemned to roam these wastelands.");
             }
             else if (numOption == 3)
-                MyMethods.print("Fobos: Definitely no! heh heh...");
+                MyMethods.print("Phobos: Definitely no! heh heh...");
             else
-                System.out.println("Invalid option.");
+                System.out.println("Invalid option. Select [1-2-3]");
             System.out.println("--------------------------------------------------");
             System.out.println("| 1. Where am I?                                 |");
             System.out.println("| 2. What are you?                               |");
@@ -76,7 +92,7 @@ public class Main {
             numOption = input.nextInt();
         }
 
-        MyMethods.print("Fobos: Lemme refresh your mind, bird-brain: now you find yourself in the domains of Lord Hades...");
+        MyMethods.print("Phobos: Lemme refresh your mind, bird-brain: now you find yourself in the domains of Lord Hades...");
         MyMethods.print("More precisely in the River Styx.");
         MyMethods.waitForInput(input);
 
@@ -89,17 +105,17 @@ public class Main {
 
         while (numOption != 1){
             if (numOption == 2) {
-                MyMethods.print("Fobos: Seems like that fall has either left you stupid or given you amnesia. Anyway...");
+                MyMethods.print("Phobos: Seems like that fall has either scrambled your brains or given you amnesia. Anyway...");
                 MyMethods.print("Lord Hades is the boss around here... the big shot, y' know. He's Zeus' older brother, you know 'im? ");
                 MyMethods.print("The guy who throws lightning bolts and all that jazz.");
                 MyMethods.waitForInput(input);
                 MyMethods.print("You: Wait... gods, you say?");
-                MyMethods.print("Fobos: Yeah, gods... They're real. As real as you and me.");
+                MyMethods.print("Phobos: Yeah, gods... They're real. As real as you and me.");
             }
             else if (numOption == 3)
-                MyMethods.print("Fobos: Jeez, you're a lost cause. The River Styx is where the souls of the dead are carried to the Underworld!");
+                MyMethods.print("Phobos: Jeez, you're a lost cause. The River Styx is where the souls of the dead sail into the Underworld!");
             else
-                System.out.println("Invalid option.");
+                System.out.println("Invalid option. Select [1-2-3]");
             System.out.println("----------------------------------------------------");
             System.out.println("| 1. Did you just said the River Styx? Am I dead?  |");
             System.out.println("| 2. Who is this Hades?                            |");
@@ -109,36 +125,68 @@ public class Main {
         }
         MyMethods.clear();
 
-        MyMethods.print("Fobos: That might be a dumb question since you're here... but, you don't seem dead at all.");
+        MyMethods.print("Phobos: That might be a dumb question since you're here... but, you don't seem dead at all.");
         MyMethods.waitForInput(input);
         MyMethods.print("You: So why am I in this place then, can you tell me?");
         MyMethods.waitForInput(input);
-        MyMethods.print("Fobos: Ah, finally the big question! I guess the gods have their reasons... ");
+        MyMethods.print("Phobos: Ah, finally the big question! I guess the gods have their reasons... ");
         MyMethods.print("And I suspect you're not a simple mortal.");
         MyMethods.waitForInput(input);
         MyMethods.print("You: What do you mean?");
         MyMethods.waitForInput(input);
-        MyMethods.print("Fobos [stays quiet for a moment]: Ah, nonsense! It was nothing.");
-        MyMethods.print("Fobos: If I knew I would be in a better place, don't you think?");
+        MyMethods.print("Phobos [stays quiet for a moment]: Ah, nonsense! It was nothing.");
         MyMethods.print("You: Whatever. I won't get anywhere just standing here. Do you know a way out?");
         MyMethods.waitForInput(input);
-        MyMethods.print("Fobos: If I knew I would be in a better place, don't you think?");
+        MyMethods.print("Phobos: If I knew I'd be in a better place, don't you think?");
         MyMethods.print("See, " + playerName + ". There are more like you who have fallen for some reason and wonder the same...");
         MyMethods.print("But even after centuries, they are still roaming these lands...");
         MyMethods.print("Well, good luck with that! [laughs]\n");
         MyMethods.waitForInput(input);
         MyMethods.clear();
-        MyMethods.print("You turn around and start walking. You must find a way out, otherwise you could be lost forever.");
-        MyMethods.print("You head towards the withered trees and follow a stone road.");
+        MyMethods.print("You turn around and start walking. You must find a way out or you might end up in oblivion.");
+        MyMethods.print("Heading towards the withered trees, you follow a stone road.");
         MyMethods.threadSleep(1000);
-        MyMethods.print("Finally you discover something: next to an abandoned carriage you find an iron sword and a purple glowing flask.");
+        MyMethods.print("Finally you stumble upon something: next to an abandoned carriage you find an iron sword and a flask glowing with a purple hue.");
         currentPlayer.setWeaponValue(1);
-        currentPlayer.setPotions(1);
+        currentPlayer.setPotions(potions + 1);
+        potions = currentPlayer.getPotions();
         MyMethods.threadSleep(500);
         MyMethods.print("+New weapon: Rusty Sword");
         MyMethods.threadSleep(500);
-        MyMethods.print("potion +1");
-        System.out.println(currentPlayer.getPotions());
-        input.close();
+        MyMethods.print("Potion +1");
+        MyMethods.waitForInput(input);
+
+        MyMethods.print("You hear footsteps behind you. When you turn around, you see the imp Phobos.");
+        MyMethods.waitForInput(input);
+        MyMethods.clear();
+        MyMethods.print("You: I need your help to survive in this unknown place.");
+        MyMethods.waitForInput(input);
+        MyMethods.print("Phobos: [Laughs] Oh, I'll help you, but you'll have to give me that potion in exchange. I bet I can make some coins off it!");
+        MyMethods.threadSleep(1000);
+        System.out.println("----------------------------------------");
+        System.out.println("| 1. Give potion                       |");
+        System.out.println("| 2. Threaten Phobos                    |");
+        System.out.println("----------------------------------------");
+        numOption = input.nextInt();
+
+        if (numOption == 1){
+            currentPlayer.setPotions(potions - 1);
+            currentPlayer.setKarma(karma + 10);
+            System.out.println("+Karma");
+            MyMethods.threadSleep(800);
+            System.out.println("Potion -1");
+            MyMethods.print("You: Ok, it's yours. Take it.");
+            MyMethods.print("Phobos [Laughing] Well, thank you, pal! Now follow me...");
+        }
+        else if (numOption == 2){
+            currentPlayer.setKarma(karma - 10);
+            System.out.println("-Karma");
+            MyMethods.print("You: [pointing your sword at Phobos] Do not play games with me, demon! You come with or you die.");
+            MyMethods.print("Phobos: All right, all right. Heh... I like this guy!");
+        }
+        else
+            System.out.println("Invalid option.");
+
+        MyMethods.waitForInput(input);
     }
 }
