@@ -1,7 +1,10 @@
 import NPCs.Encounters;
 import player.Player;
+import utils.DialogueManager;
 import utils.MyMethods;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -67,15 +70,16 @@ public class Main {
         MyMethods.print("Phobos: " + playerName + "? Now that's a terrible name! Heh heh heh...");
         MyMethods.threadSleep(1000);
         MyMethods.clear();
+        int numOption = 0;
+        List<String> responses = new ArrayList<>();
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("| 1. Where am I?                                 |");
-        System.out.println("| 2. What are you?                               |");
-        System.out.println("| 3. Am I dreaming?                              |");
-        System.out.println("--------------------------------------------------");
-        int numOption = input.nextInt();
+        do{
+            responses.add("Where am I?");
+            responses.add("What are you?");
+            responses.add("Am I dreaming?");
+            DialogueManager.displayDialogue(responses);
+            numOption = input.nextInt();
 
-        while (numOption != 1){
             if (numOption == 2){
                 MyMethods.print("Phobos: WHAT am I? That's rude, man!");
                 MyMethods.print("...Oh, never mind. I'm just one of Lord Hades' servant. A demon condemned to roam these wastelands.");
@@ -84,26 +88,21 @@ public class Main {
                 MyMethods.print("Phobos: Definitely no! heh heh...");
             else
                 System.out.println("Invalid option. Select [1-2-3]");
-            System.out.println("--------------------------------------------------");
-            System.out.println("| 1. Where am I?                                 |");
-            System.out.println("| 2. What are you?                               |");
-            System.out.println("| 3. Am I dreaming?                              |");
-            System.out.println("--------------------------------------------------");
-            numOption = input.nextInt();
         }
+        while (numOption != 1);
 
         MyMethods.print("Phobos: Lemme refresh your mind, bird-brain: now you find yourself in the domains of Lord Hades...");
         MyMethods.print("More precisely in the River Styx.");
         MyMethods.waitForInput(input);
 
-        System.out.println("----------------------------------------------------");
-        System.out.println("| 1. Did you just said the River Styx? Am I dead?  |");
-        System.out.println("| 2. Who is this Hades?                            |");
-        System.out.println("| 3. What is exactly the River Styx?               |");
-        System.out.println("----------------------------------------------------");
-        numOption = input.nextInt();
+        do{
+            responses = new ArrayList<>();
+            responses.add("Did you just said the River Styx? Am I dead?");
+            responses.add("Who is this Hades?");
+            responses.add("What is exactly the River Styx?");
+            DialogueManager.displayDialogue(responses);
+            numOption = input.nextInt();
 
-        while (numOption != 1){
             if (numOption == 2) {
                 MyMethods.print("Phobos: Seems like that fall has either scrambled your brains or given you amnesia. Anyway...");
                 MyMethods.print("Lord Hades is the boss around here... the big shot, y' know. He's Zeus' older brother, you know 'im? ");
@@ -116,13 +115,8 @@ public class Main {
                 MyMethods.print("Phobos: Jeez, you're a lost cause. The River Styx is where the souls of the dead sail into the Underworld!");
             else
                 System.out.println("Invalid option. Select [1-2-3]");
-            System.out.println("----------------------------------------------------");
-            System.out.println("| 1. Did you just said the River Styx? Am I dead?  |");
-            System.out.println("| 2. Who is this Hades?                            |");
-            System.out.println("| 3. What is exactly the River Styx?               |");
-            System.out.println("----------------------------------------------------");
-            numOption = input.nextInt();
         }
+        while (numOption != 1);
         MyMethods.clear();
 
         MyMethods.print("Phobos: That might be a dumb question since you're here... but, you don't seem dead at all.");
@@ -143,6 +137,7 @@ public class Main {
         MyMethods.print("Well, good luck with that! [laughs]\n");
         MyMethods.waitForInput(input);
         MyMethods.clear();
+
         MyMethods.print("You turn around and start walking. You must find a way out or you might end up in oblivion.");
         MyMethods.print("Heading towards the withered trees, you follow a stone road.");
         MyMethods.threadSleep(1000);
@@ -163,10 +158,10 @@ public class Main {
         MyMethods.waitForInput(input);
         MyMethods.print("Phobos: [Laughs] Oh, I'll help you, but you'll have to give me that potion in exchange. I bet I can make some coins off it!\n");
         MyMethods.threadSleep(1000);
-        System.out.println("----------------------------------------");
-        System.out.println("| 1. Give potion                       |");
-        System.out.println("| 2. Threaten Phobos                   |");
-        System.out.println("----------------------------------------");
+        responses = new ArrayList<>();
+        responses.add("Give potion");
+        responses.add("Threaten Phobos");
+        DialogueManager.displayDialogue(responses);
         numOption = input.nextInt();
 
         if (numOption == 1){
@@ -175,33 +170,33 @@ public class Main {
             System.out.println("+Karma");
             MyMethods.threadSleep(800);
             System.out.println("Potion -1");
-            MyMethods.print("You: Ok, it's yours. Take it.");
+            MyMethods.print("\nYou: Ok, it's yours. Take it.\n");
             MyMethods.print("Phobos [Laughing] Well, thank you, pal! Now follow me...");
         }
         else if (numOption == 2){
             currentPlayer.setKarma(karma - 10);
             System.out.println("-Karma");
-            MyMethods.print("You: [pointing your sword at Phobos] Do not play games with me, demon! You come with or you die.");
+            MyMethods.print("\nYou: [pointing your sword at Phobos] Do not play games with me, demon! You come with or you die.\n");
             MyMethods.print("Phobos: All right, all right. Heh... I like this guy!");
         }
         else
             System.out.println("Invalid option.");
 
-        MyMethods.print("Phobos: Hear me out, dude. You should be more grateful, especially since I've got some valuable information...");
-        MyMethods.print("You: Go ahead.");
+        MyMethods.print("Hear me out, dude. You should be more grateful, especially since I've got some valuable information...\n");
+        MyMethods.print("You: Go ahead.\n");
         MyMethods.waitForInput(input);
         MyMethods.print("Phobos: Right now, you stand on the outskirts of the Asphodel Meadows. You must follow the River Styx to enter.");
 
-        System.out.println("----------------------------------------------------");
-        System.out.println("| 1. ... Continue.                                 |");
-        System.out.println("| 2. Asphodel Meadows?                             |");
-        System.out.println("| 3. And then what? Ask for directions to Hades?   |");
-        System.out.println("----------------------------------------------------");
+        responses = new ArrayList<>();
+        responses.add("... Continue.");
+        responses.add("Asphodel Meadows?");
+        responses.add("And then what? Ask for directions to Hades?");
+        DialogueManager.displayDialogue(responses);
         numOption = input.nextInt();
 
         if (numOption == 1){
             MyMethods.print("Phobos: The idea is getting into the Hades' Palace, which is in the middle of the Asphodel, avoiding, of course, Hades itself.");
-            MyMethods.print("Once you're in, ask for Persephone. She will be willing to help you. Ah, and avoid the guards as well.");
+            MyMethods.print("Once you're in, ask for Persephone. She will be willing to helping you. Ah, and avoid the guards as well.");
         }
         else if (numOption == 2){
             MyMethods.print("Phobos: [Eye-rolling] The Asphodel Meadows, dude! It's where the common people go in the afterlife.");
