@@ -9,7 +9,7 @@ public class Encounters {
     private static ArrayList<Enemy> weakEnemies = new ArrayList<>();
     private static ArrayList<Enemy> commonEnemies = new ArrayList<>();
     private static ArrayList<Enemy> strongEnemies = new ArrayList<>();
-    private static Random random = new Random();
+    private final static Random random = new Random();
 
     public static void initializeEnemies(){
         int randWeak = random.nextInt(10,50);
@@ -36,18 +36,35 @@ public class Encounters {
         int rand = random.nextInt(10,50);
         Enemy undead = new Enemy("Undead Warrior",5, 1, rand);
 
-        MyMethods.print("You and Phobos continue on your way until you hear metallic and heavy footsteps.");
+        MyMethods.print("You and Phobos continue on your way until you hear metallic and heavy footsteps.\n");
         MyMethods.waitForInput(input);
-        MyMethods.print("Phobos: that's an undead warrior. There are plenty around the Underworld.");
-        MyMethods.print("They only have one goal: to eliminate any intruder... and I think they already know you don't belong here!");
-        MyMethods.print("You hold boldly your sword and get ready for the confrontation!");
+        MyMethods.print("Phobos: That's an undead warrior. There are plenty around the Underworld.");
+        MyMethods.print("They only have one goal: to eliminate any intruder... and I think they already know you don't belong here!\n");
+        MyMethods.print("You hold boldly your sword and get ready for the confrontation!\n");
         MyMethods.waitForInput(input);
-        
+
         combat(player, undead, input);
     }
 
-    public static void randomWeakEncounter(){
-        
+    public static void randomWeakEncounter(Player player, Scanner input){
+        // elegir enemigo débil aleatorio
+        int index = random.nextInt(weakEnemies.size());
+        Enemy enemy = weakEnemies.get(index);
+        combat(player, enemy, input);
+    }
+
+    public static void randomCommonEncounter(Player player, Scanner input){
+        // elegir enemigo común aleatorio
+        int index = random.nextInt(commonEnemies.size());
+        Enemy enemy = commonEnemies.get(index);
+        combat(player, enemy, input);
+    }
+
+    public static void randomStrongEncounter(Player player, Scanner input){
+        // elegir enemigo fuerte aleatorio
+        int index = random.nextInt(strongEnemies.size());
+        Enemy enemy = strongEnemies.get(index);
+        combat(player, enemy, input);
     }
 
     public static void combat(Player player, Enemy enemy, Scanner input){
@@ -94,7 +111,7 @@ public class Encounters {
             }
             else if (option.equalsIgnoreCase("d")){
                 int damageTaken = (enemy.getDamage()/4) - player.getShieldValue();
-                int attackValue = random.nextInt(0, player.getShieldValue()) + random.nextInt(1, 4);
+                int attackValue = (random.nextInt(0, player.getWeaponValue())/ 2);
 
                 if (damageTaken < 0)
                     damageTaken = 0;
@@ -162,5 +179,9 @@ public class Encounters {
                 System.exit(0);
             }
         }
+        int coins = enemy.getCoinsReward();
+        player.setCoins(player.getCoins() + coins);
+        MyMethods.print("With a final strike, you vanquish your opponent! As you stand victorious, the " + enemyName + " dissolves into " + coins + " obols!");
+        MyMethods.waitForInput(input);
     }
 }

@@ -27,7 +27,7 @@ public class Main {
         MyMethods.print("\nAll your senses feel numb. You cannot hear anything in the middle of the infinite darkness.");
         MyMethods.print("Suddenly, a green beam cuts through the shadows, gently revealing the environment.");
         MyMethods.print("Now before you, a desolate scene appears: you are locked in a stone dungeon, whose only way out");
-        MyMethods.print("appears to be a bars door. Though it you can see withered trees and green waterfalls, from");
+        MyMethods.print("appears to be a bars door. Through it you can see withered trees and green waterfalls, from");
         MyMethods.print("which emerge silhouettes of corpses.");
         MyMethods.waitForInput(input);
         MyMethods.print("Beyond the bars door you see a strange little creature. Would you like to get closer? y/N");
@@ -147,7 +147,7 @@ public class Main {
         MyMethods.print("Heading towards the withered trees, you follow a stone road.");
         MyMethods.threadSleep(1000);
         MyMethods.print("Finally you stumble upon something: next to an abandoned carriage you find an iron sword and a flask glowing with a purple hue.");
-        currentPlayer.setWeaponValue(1);
+        currentPlayer.setWeaponValue(2);
         currentPlayer.setPotions(potions + 1);
         potions = currentPlayer.getPotions();
         MyMethods.threadSleep(500);
@@ -155,17 +155,17 @@ public class Main {
         MyMethods.threadSleep(500);
         MyMethods.print("Potion +1");
         MyMethods.waitForInput(input);
-
-        MyMethods.print("You hear footsteps behind you. When you turn around, you see the imp Phobos.");
-        MyMethods.waitForInput(input);
         MyMethods.clear();
-        MyMethods.print("You: I need your help to survive in this unknown place.");
+
+        MyMethods.print("You hear footsteps behind you. When you turn around, you see the imp Phobos.\n");
         MyMethods.waitForInput(input);
-        MyMethods.print("Phobos: [Laughs] Oh, I'll help you, but you'll have to give me that potion in exchange. I bet I can make some coins off it!");
+        MyMethods.print("You: You again? I need your help to survive in this unknown place.");
+        MyMethods.waitForInput(input);
+        MyMethods.print("Phobos: [Laughs] Oh, I'll help you, but you'll have to give me that potion in exchange. I bet I can make some coins off it!\n");
         MyMethods.threadSleep(1000);
         System.out.println("----------------------------------------");
         System.out.println("| 1. Give potion                       |");
-        System.out.println("| 2. Threaten Phobos                    |");
+        System.out.println("| 2. Threaten Phobos                   |");
         System.out.println("----------------------------------------");
         numOption = input.nextInt();
 
@@ -187,6 +187,34 @@ public class Main {
         else
             System.out.println("Invalid option.");
 
+        MyMethods.print("Phobos: Hear me out, dude. You should be more grateful, especially since I've got some valuable information...");
+        MyMethods.print("You: Go ahead.");
         MyMethods.waitForInput(input);
+        MyMethods.print("Phobos: Right now, you stand on the outskirts of the Asphodel Meadows. You must follow the River Styx to enter.");
+
+        System.out.println("----------------------------------------------------");
+        System.out.println("| 1. ... Continue.                                 |");
+        System.out.println("| 2. Asphodel Meadows?                             |");
+        System.out.println("| 3. And then what? Ask for directions to Hades?   |");
+        System.out.println("----------------------------------------------------");
+        numOption = input.nextInt();
+
+        if (numOption == 1){
+            MyMethods.print("Phobos: The idea is getting into the Hades' Palace, which is in the middle of the Asphodel, avoiding, of course, Hades itself.");
+            MyMethods.print("Once you're in, ask for Persephone. She will be willing to help you. Ah, and avoid the guards as well.");
+        }
+        else if (numOption == 2){
+            MyMethods.print("Phobos: [Eye-rolling] The Asphodel Meadows, dude! It's where the common people go in the afterlife.");
+            MyMethods.print("People who didn't do bad things, y' know, but they're not good enough to deserve Elysium. The Elysian Fields are reserved for heroes!");
+            MyMethods.print("...and then there's the Tartarus. Trust me, you don't wanna go down to Tartarus. That place's reserved for really bad people... and the Titans, heh heh...\n");
+            MyMethods.print("Listen, the idea is getting into the Hades' Palace, which is in the middle of the Asphodel, avoiding, of course, Hades itself.");
+            MyMethods.print("Once you're in, ask for Persephone. She will be willing to help you. Ah, and avoid the guards as well.");
+        }
+        else if (numOption == 3){
+            MyMethods.print("Phobos: You're not as dumb as you look! Well, at least not that dumb, he he.");
+            MyMethods.print("What you said is correct, except for the part about seeing Hades. They said he doesn't like visitors, especially if your not dead.");
+            MyMethods.print("We should look for Persephone, his wife, who is much... nicer, to say the least.\n");
+        }
+
     }
 }
