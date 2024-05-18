@@ -18,7 +18,7 @@ public class MyMethods {
     }
 
     public static void clear(){
-        for (int i = 0; i < 50; i++){
+        for (int i = 50; i > 0; i--){
             System.out.println();
         }
     }

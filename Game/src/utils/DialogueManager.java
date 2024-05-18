@@ -10,7 +10,9 @@ public class DialogueManager {
         }
 
         //calcular longitud del 'techo' del cuadro de diálogo
-        int boxWidth = (maxLength)*2 + 4;
+        final int MAX_BOX_WIDTH = 60;       //ancho máximo del recuadro
+        final double SCALE_FACTOR = 1.5;    //escala
+        int boxWidth = (int) Math.max(maxLength* SCALE_FACTOR + 4, MAX_BOX_WIDTH);
 
         System.out.println("+" + "-".repeat(boxWidth - 2) + "+");
         for (int i = 0; i < optionsDialogue.size(); i++){
